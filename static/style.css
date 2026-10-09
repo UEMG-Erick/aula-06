@@ -1,0 +1,248 @@
+:root {
+    color-scheme: light;
+    --ink: #202a27;
+    --muted: #68736e;
+    --paper: #f3f6f2;
+    --surface: #ffffff;
+    --line: #dce4dc;
+    --green: #236b53;
+    --green-dark: #194d3c;
+    --coral: #bd5949;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 64px 20px;
+    background-color: var(--paper);
+    background-image: radial-gradient(#d9e4d9 0.7px, transparent 0.7px);
+    background-size: 18px 18px;
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.todo-app {
+    width: min(100%, 680px);
+    margin: 0 auto;
+    padding: 42px;
+    border: 1px solid var(--line);
+    border-top: 5px solid var(--green);
+    background: var(--surface);
+    box-shadow: 0 16px 42px rgb(32 42 39 / 8%);
+    animation: arrive 450ms ease-out both;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.eyebrow,
+.task-count,
+.add-form,
+.task-actions,
+.empty-state {
+    font-family: Arial, sans-serif;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 5px;
+    font-size: 38px;
+    font-weight: 500;
+}
+
+.subtitle {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 17px;
+}
+
+.add-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 34px;
+}
+
+.add-form input {
+    min-width: 0;
+    flex: 1;
+    padding: 13px 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--ink);
+    font: inherit;
+}
+
+button {
+    min-height: 44px;
+    padding: 0 17px;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    font: 700 14px Arial, sans-serif;
+}
+
+.add-form button {
+    background: var(--green);
+    color: white;
+}
+
+.add-form button:hover {
+    background: var(--green-dark);
+}
+
+.section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+}
+
+h2 {
+    margin-bottom: 0;
+    font-size: 21px;
+    font-weight: 500;
+}
+
+.task-count {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.task-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.task-item {
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    animation: arrive 300ms ease-out both;
+}
+
+.task-description {
+    overflow-wrap: anywhere;
+    font-size: 17px;
+}
+
+.is-complete .task-description {
+    color: var(--muted);
+    text-decoration: line-through;
+}
+
+.task-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+}
+
+.task-actions form {
+    margin: 0;
+}
+
+.task-actions button {
+    min-height: 34px;
+    padding: 0 10px;
+    background: #e8f1eb;
+    color: var(--green-dark);
+    font-size: 12px;
+}
+
+.task-actions .remove-button {
+    background: #f8ece9;
+    color: var(--coral);
+}
+
+.completed-label {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.empty-state {
+    margin: 0;
+    padding: 24px 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+@keyframes arrive {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 24px 12px;
+    }
+
+    .todo-app {
+        padding: 28px 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .task-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px 0;
+    }
+
+    .task-actions {
+        align-self: flex-end;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}

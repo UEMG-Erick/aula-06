@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Minhas tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="todo-app">
+        <header class="page-header">
+            <p class="eyebrow">ORGANIZAÇÃO PESSOAL</p>
+            <h1>Minhas tarefas</h1>
+            <p class="subtitle">Um passo de cada vez.</p>
+        </header>
+
+        <form class="add-form" action="{{ url_for('tarefa_routes.adicionar') }}" method="post">
+            <label class="visually-hidden" for="descricao">Nova tarefa</label>
+            <input id="descricao" name="descricao" type="text" placeholder="O que precisa ser feito?" required maxlength="200">
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <section class="task-section" aria-labelledby="task-heading">
+            <div class="section-heading">
+                <h2 id="task-heading">Sua lista</h2>
+                <span class="task-count">{{ tarefas|length }} {{ 'tarefa' if tarefas|length == 1 else 'tarefas' }}</span>
+            </div>
+
+            {% if tarefas %}
+                <ul class="task-list">
+                    {% for tarefa in tarefas %}
+                        <li class="task-item {{ 'is-complete' if tarefa.concluida else '' }}">
+                            <span class="task-description">{{ tarefa.descricao }}</span>
+                            <div class="task-actions">
+                                {% if not tarefa.concluida %}
+                                    <form action="{{ url_for('tarefa_routes.concluir', id=tarefa.id) }}" method="post">
+                                        <button class="complete-button" type="submit">Concluir</button>
+                                    </form>
+                                {% else %}
+                                    <span class="completed-label">Concluída</span>
+                                {% endif %}
+                                <form action="{{ url_for('tarefa_routes.remover', id=tarefa.id) }}" method="post">
+                                    <button class="remove-button" type="submit" aria-label="Remover {{ tarefa.descricao }}">Remover</button>
+                                </form>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="empty-state">Sua lista está vazia. Adicione a primeira tarefa acima.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
